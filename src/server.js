@@ -6,10 +6,13 @@ const { startOrderWorker } = require('./modules/order/worker');
 const PORT = process.env.PORT || 3000;
 
 (async () => {
-  await connectRabbitMQ();
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
+  try {
+    await connectRabbitMQ(); // 🟢 Connect to RabbitMQ first
+    startOrderWorker(); // 🟢 Then start worker
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ App failed to start:', err.message);
+  }
 })();
-
-startOrderWorker();
