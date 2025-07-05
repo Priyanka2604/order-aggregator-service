@@ -6,10 +6,10 @@ app.use(express.json());
 // Route imports
 const orderRoutes = require('./modules/order/routes');
 //const stockRoutes = require('./modules/stock/routes');
-//const vendorRoutes = require('./modules/vendor/routes');
+const vendorRoutes = require('./modules/vendors/routes');
 
 app.use('/order', orderRoutes);
 //app.use('/stock', stockRoutes);
-//app.use('/vendor', vendorRoutes);
+app.use('/vendor', vendorRoutes);
 
 module.exports = app;
