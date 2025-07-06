@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./jobs/index');
 const app = require('./app');
 const { connectRabbitMQ } = require('./modules/shared/rabbitmq');
 const { startOrderWorker } = require('./modules/order/worker');
@@ -13,6 +14,6 @@ const PORT = process.env.PORT || 3000;
       console.log(`Server running at http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error('❌ App failed to start:', err.message);
+    console.error('❌ App failed to start:', error.message);
   }
 })();
