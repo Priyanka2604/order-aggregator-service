@@ -27,7 +27,7 @@ async function placeOrder(productId, quantity) {
 
     // Create order
     const order = await client.query(
-      `INSERT INTO orders (order_id, product_id, quantity, status) 
+      `INSERT INTO orders (id, product_id, quantity, status) 
        VALUES (gen_random_uuid(), $1, $2, 'pending') RETURNING *`,
       [productId, quantity]
     );
