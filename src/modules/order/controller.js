@@ -8,10 +8,13 @@ async function placeOrder(req, res) {
 
   try {
     const order = await orderService.placeOrder(productId, quantity);
-    res.status(201).json(order);
+    res.status(201).json({
+      message: '✅ Order placed successfully',
+      order,
+  });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({'Failed to place order': err.message});
   }
 }
 
