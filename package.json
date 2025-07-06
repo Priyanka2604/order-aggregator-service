@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "sync": "node src/jobs/stock.sync.job.js"
+    "sync:stock": "node src/jobs/stock.sync.js"
   },
   "keywords": [],
   "author": "",
@@ -15,11 +15,17 @@
   "type": "commonjs",
   "dependencies": {
     "amqplib": "^0.10.8",
+    "axios": "^1.10.0",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
-    "pg": "^8.16.3"
+    "node-cron": "^4.2.0",
+    "pg": "^8.16.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.1",
     "nodemon": "^3.1.10"
   }
 }
