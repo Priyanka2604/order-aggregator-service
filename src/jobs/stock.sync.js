@@ -8,7 +8,7 @@ async function syncAllVendorStock() {
   for (const vendorId of Object.keys(vendorList)) {
     try {
       console.log(`🔄 Syncing stock from vendor: ${vendorId}`);
-      const res = await axios.get(`${baseURL}/vendor/${vendorId}/stock`, { timeout: 3000}); 
+      const res = await axios.get(`${baseURL}/vendor/${vendorId}/stock`, { timeout: 30000}); 
       const stockData = res.data;
 
       await stockService.syncStockFromVendor(vendorId, stockData);
