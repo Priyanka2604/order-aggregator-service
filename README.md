@@ -1,58 +1,97 @@
-# Backend Assignment: Distributed Order Aggregator System
-
-## OBJECTIVE
-Build a Node.js-based order processing platform that acts as a stock aggregator, syncing inventories from multiple third-party vendor systems and ensuring consistent and reliable order handling under high load.
+# 🛒 Distributed Order Aggregator System
 
 ## OVERVIEW
-Your system integrates with independent vendor systems and maintains a local copy of their stock in your PostgreSQL database. This enables faster access and better availability for real-time order processing.
+A Node.js-based backend system that aggregates product stock from multiple vendor sources and processes orders reliably under high load using RabbitMQ and PostgreSQL.
 
-You will simulate third-party systems as mock APIs or separate databases.
+## 📦 Features
 
-## REQUIREMENTS
-### 1. Vendor Integration (Stock Aggregation)
-Vendors can be mocked as:
-Randomized API endpoints (/vendorA/stock, etc.)
-Or separate local Postgres tables/databases
-Store aggregated stock in your local DB.
+- 🔗 Vendor integration via simulated APIs
+- 🗃️ Local stock storage in PostgreSQL
+- 🛒 REST API to place and confirm orders
+- 📬 RabbitMQ-based queue system for background processing
+- ♻️ Retry logic and Dead Letter Queue (DLQ) support
+- ⚙️ Modular monolith architecture with clean separation
 
-### 2. Order API
-POST /order
-Accepts product ID and quantity.
-Must:
-Check local stock
-Reserve and reduce stock atomically bot for local and vendor
-Prevent double-selling under concurrency
+## ⚙️ TECH STACK
 
-### 3. Messaging Queue Integration
-Use RabbitMQ (preferred) or Zookeeper to:
-Queue order events for processing
-Ensure only one worker processes each order
-Guarantee no duplicate processing
-Include basic retry logic for failures
+![Node.js](https://img.shields.io/badge/nodejs-18.x-green)
+![Express](https://img.shields.io/badge/express.js-lightgrey)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue)
+![RabbitMQ](https://img.shields.io/badge/RabbitMQ-queue-orange)
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL
+- **Messaging Queue**: RabbitMQ
+- **Libraries**: Axios, dotenv, pg, amqplib
+- **Testing**: Mocha, Chai
 
-### 4. Consistency & Availability
-Design for:
-Consistency between vendor stock and local stock
-Strong consistency in local order processing
-High availability and safe parallelism under high load.
+## 🧠 Architecture Diagram
 
-## TECHNICAL STACK
-Language: Node.js
-DB: PostgreSQL
-Messaging: RabbitMQ or Zookeeper
-Architecture: Microservice-style or modular monolith.
+System Design Doc : https://shorturl.at/e4MLc
+Stock sync flow and Queue based worker model flow diagram : https://shorturl.at/RAXG3
 
-## DELIVERABLES
-Code repo with working solution
-Simple system design doc (1 page max):
-Stock sync flow
-Order placement architecture
-Queue-based worker model
-Consistency guarantees
-README:
-Setup instructions
-Any assumptions or mock data
-Commands to run stock sync, place order, run workers.
+## 🚀 Setup Instructions
 
-### BONUS (OPTIONAL)
-Simulate vendor failures and show system recovery.
+### 1. Clone the Repository
+```
+git clone https://github.com/your-username/order-aggregator-service.git
+cd order-aggregator-service
+```
+
+### 2. Install Dependencies
+``` npm install ```
+
+### 3. Environment Setup
+Create a .env file in the root directory:
+```
+PORT=3000
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_pg_username
+DB_PASSWORD=your_pg_password
+DB_NAME=order_aggregator
+RABBITMQ_URL=amqp://localhost
+```
+
+### 4. Install and Start PostgreSQL and RabbitMQ (Mac)
+```
+brew install postgres
+brew install rabbitmq
+brew services start postgresql
+brew services start postgresql@14
+```
+
+### 🛠️ Commands
+#### ▶️ Start the Server
+``` npm start ```
+Runs the Express server on http://localhost:3000 
+
+#### 🔄 Run Stock Sync Job
+``` npm run sync:stock ```
+Fetches vendor stock (from mock APIs) and updates the local products table.
+
+#### 🛒 Place an Order
+Use Postman or cURL to send a POST request:
+```
+POST http://localhost:3000/order
+Content-Type: application/json
+
+{
+  "productId": "product-uuid-here",
+  "quantity": 2
+}
+```
+#### ⚙️ Start Order Worker
+``` npm run worker ```
+
+#### 🧪 Test
+``` npm test```
+Runs unit tests (Uses Mocha and Chai for unit tests).
+
+📝 Assumptions
+- Vendor APIs are mocked via Express routes.
+
+- Orders are first saved with PENDING status and confirmed via worker.
+
+- Stock is "locked" during DB transaction to avoid race conditions.
+
