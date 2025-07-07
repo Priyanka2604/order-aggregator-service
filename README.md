@@ -27,8 +27,8 @@ A Node.js-based backend system that aggregates product stock from multiple vendo
 
 ## 🧠 Architecture Diagram
 
-System Design Doc : https://shorturl.at/e4MLc
-Stock sync flow and Queue based worker model flow diagram : https://shorturl.at/RAXG3
+- System Design Doc : https://shorturl.at/e4MLc
+- Stock sync flow and Queue based worker model flow diagram : https://shorturl.at/RAXG3
 
 ## 🚀 Setup Instructions
 
