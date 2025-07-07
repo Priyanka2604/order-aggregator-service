@@ -14,7 +14,7 @@ A Node.js-based backend system that aggregates product stock from multiple vendo
 
 ## ⚙️ TECH STACK
 
-![Node.js](https://img.shields.io/badge/nodejs-18.x-green)
+![Node.js](https://img.shields.io/badge/nodejs-v24.x-green)
 ![Express](https://img.shields.io/badge/express.js-lightgrey)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue)
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-queue-orange)
