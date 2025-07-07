@@ -1,7 +1,9 @@
 # 🛒 Distributed Order Aggregator System
 
+
 ## OVERVIEW
 A Node.js-based backend system that aggregates product stock from multiple vendor sources and processes orders reliably under high load using RabbitMQ and PostgreSQL.
+
 
 ## 📦 Features
 
@@ -11,6 +13,7 @@ A Node.js-based backend system that aggregates product stock from multiple vendo
 - 📬 RabbitMQ-based queue system for background processing
 - ♻️ Retry logic and Dead Letter Queue (DLQ) support
 - ⚙️ Modular monolith architecture with clean separation
+
 
 ## ⚙️ TECH STACK
 
@@ -25,10 +28,12 @@ A Node.js-based backend system that aggregates product stock from multiple vendo
 - **Libraries**: Axios, dotenv, pg, amqplib
 - **Testing**: Mocha, Chai
 
+
 ## 🧠 Architecture Diagram
 
 - System Design Doc : https://shorturl.at/e4MLc
 - Stock sync flow and Queue based worker model flow diagram : https://shorturl.at/RAXG3
+
 
 ## 🚀 Setup Instructions
 
@@ -42,6 +47,7 @@ cd order-aggregator-service
 ``` npm install ```
 
 ### 3. Environment Setup
+
 Create a .env file in the root directory:
 ```
 PORT=3000
@@ -61,16 +67,17 @@ brew services start postgresql
 brew services start postgresql@14
 ```
 
-### 🛠️ Commands
-#### ▶️ Start the Server
+## 🛠️ Commands
+
+### ▶️ Start the Server
 ``` npm start ```
 - Runs the Express server on http://localhost:3000 
 
-#### 🔄 Run Stock Sync Job
+### 🔄 Run Stock Sync Job
 ``` npm run sync:stock ```
 - Fetches vendor stock (from mock APIs) and updates the local products table.
 
-#### 🛒 Place an Order
+### 🛒 Place an Order
 Use Postman or cURL to send a POST request:
 
 ```
@@ -82,10 +89,13 @@ Content-Type: application/json
   "quantity": 2
 }
 ```
-#### ⚙️ Start background Order Worker
+
+### ⚙️ Start background Order Worker
 ``` npm run worker ```
 
-#### 📂 Project Structure
+
+
+## 📂 Project Structure
 ```
 src/
 ├── modules/
@@ -114,14 +124,22 @@ src/
 ├── .env
 ```
 
-#### 🧪 Test
+### 🧪 Test
 ```` npm test ````
 - Runs unit tests (Uses Mocha and Chai for unit tests).
 
-📝 Assumptions
+### 📝 Assumptions
 - Vendor APIs are mocked via Express routes.
 
 - Orders are first saved with PENDING status and confirmed via worker.
 
 - Stock is "locked" during DB transaction to avoid race conditions.
 
+
+
+
+
+
+
+### 📫 Contact
+Have feedback or questions? Feel free to reach out or raise an issue.
