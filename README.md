@@ -64,14 +64,15 @@ brew services start postgresql@14
 ### 🛠️ Commands
 #### ▶️ Start the Server
 ``` npm start ```
-Runs the Express server on http://localhost:3000 
+- Runs the Express server on http://localhost:3000 
 
 #### 🔄 Run Stock Sync Job
 ``` npm run sync:stock ```
-Fetches vendor stock (from mock APIs) and updates the local products table.
+- Fetches vendor stock (from mock APIs) and updates the local products table.
 
 #### 🛒 Place an Order
 Use Postman or cURL to send a POST request:
+
 ```
 POST http://localhost:3000/order
 Content-Type: application/json
@@ -81,12 +82,41 @@ Content-Type: application/json
   "quantity": 2
 }
 ```
-#### ⚙️ Start Order Worker
+#### ⚙️ Start background Order Worker
 ``` npm run worker ```
 
+#### 📂 Project Structure
+```
+src/
+├── modules/
+│        ├── order/
+│        │     ├── controller.js
+│        │     ├── model.js
+│        │     ├── routes.js
+│        │     ├── service.js
+│        │     ├── worker.js
+│        ├── vendors/
+│        │     ├── controller.js
+│        │     ├── routes.js
+│        │     ├──service.js
+│        │     └── mock.js    
+│        ├── stock/
+│        │     ├── model.js
+│        │     └──service.js
+│        └── shared/
+│            ├── db.js
+│            └── rabbitmq.js
+├── jobs/
+│   ├── stock.sync.js
+│   └── index.js
+├── app.js
+├── server.js
+├── .env
+```
+
 #### 🧪 Test
-``` npm test```
-Runs unit tests (Uses Mocha and Chai for unit tests).
+```` npm test ````
+- Runs unit tests (Uses Mocha and Chai for unit tests).
 
 📝 Assumptions
 - Vendor APIs are mocked via Express routes.
