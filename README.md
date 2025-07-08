@@ -63,7 +63,7 @@ RABBITMQ_URL=amqp://localhost
 ```
 brew install postgres
 brew install rabbitmq
-brew services start postgresql
+brew services start rabbitmq
 brew services start postgresql@14
 ```
 
